@@ -1,0 +1,29 @@
+### REQ.1 -  Add an order 
+POST  http://localhost:8083/api/orders HTTP/1.1
+content-type: application/json
+
+{
+    "id": "01",
+    "userId": "C007",
+    "pizzaCode": "P121",   
+    "pizzaQuantity": 6,
+    "address": "Tartu, Narva, 23 - 11" 
+}
+
+
+### REQ.2 - Update an orders status to ready 
+PUT  http://localhost:8084/api/orders HTTP/1.1
+content-type: application/json
+
+{
+    "id": "01",
+    "userId": "C007",
+    "pizzaCode": "P121",   
+    "pizzaQuantity": 6 
+}
+
+
+### REQ.3 - Get avilable deliveries
+http://localhost:8085/api/delivery
+
+#####################

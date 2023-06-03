@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "OrderserviceApplication",
+            "request": "launch",
+            "mainClass": "com.esi.orderservice.OrderserviceApplication",
+            "projectName": "orderservice"
+        },
+        {
+            "type": "java",
+            "name": "KitchenserviceApplication",
+            "request": "launch",
+            "mainClass": "com.esi.kitchenservice.KitchenserviceApplication",
+            "projectName": "kitchenservice"
+        },
+        {
+            "type": "java",
+            "name": "DeliveryserviceApplication",
+            "request": "launch",
+            "mainClass": "com.esi.deliveryservice.DeliveryserviceApplication",
+            "projectName": "deliveryservice"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-kitchenserviceApplication<kitchenservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.esi.kitchenservice.kitchenserviceApplication",
+            "projectName": "kitchenservice",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
