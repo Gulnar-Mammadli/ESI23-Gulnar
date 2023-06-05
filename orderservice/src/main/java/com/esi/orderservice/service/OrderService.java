@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.esi.orderservice.dto.OrderDto;
 import com.esi.orderservice.repository.OrderRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -39,4 +41,8 @@ public class OrderService {
         log.info("A order request id: {} has been added and sent to kitchen service", orderDto.getId());
     }
 
+    public String getAddressById(String id) {
+        Optional<Order> order = orderRepository.findById(id);
+        return order.map(Order::getAddress).orElse(null);
+    }
 }
