@@ -3,6 +3,7 @@ package com.esi.orderservice.service;
 import com.esi.orderservice.model.Order;
 import com.esi.orderservice.model.OrderStatus;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,12 @@ import com.esi.orderservice.repository.OrderRepository;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
-    private final KafkaTemplate<String, OrderDto> kafkaTemplate;
+    private final KafkaTemplate<String, OrderDto> kafkaOrderTemplate;
 
 
 
@@ -33,7 +35,8 @@ public class OrderService {
         orderDto.setOrderStatus(OrderStatus.Received);
 
         orderRepository.save(order);
-        kafkaTemplate.send("orderCreatedTopic",orderDto);
+        kafkaOrderTemplate.send("orderCreatedTopic",orderDto);
+        log.info("A order request id: {} has been added and sent to kitchen service", orderDto.getId());
     }
 
 }
