@@ -12,6 +12,9 @@ import com.esi.deliveryservice.repository.DeliveryRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -36,5 +39,36 @@ public class DeliveryService {
     }
 
 
+    public List<OrderDto> getAllOrdersDeliveries() {
+        List<Order> orders =  new ArrayList<>();
+        deliveryRepository.findAll().forEach(orders::add);
+        List<OrderDto> orderDtos = orders.stream().map(this::mapToOrderDto).toList();
+        for(OrderDto orderDto : orderDtos){
+            String address = getAddress(orderDto.getId());
+            orderDto.setAddress(address);
+        }
+        return orderDtos;
+    }
+
+    private OrderDto mapToOrderDto(Order order) {
+        OrderDto orderdto = OrderDto.builder()
+                .id(order.getId())
+                .userId(order.getUserId())
+                .pizzaCode(order.getPizzaCode())
+                .pizzaQuantity(order.getPizzaQuantity())
+                .orderStatus(order.getOrderStatus())
+                .build();
+        return orderdto;
+    }
+    private String getAddress(String id) {
+        String address = webClientBuilder
+                .build()
+                .get()
+                .uri("http://localhost:8083/api/orders/address/{id}", id)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        return address;
+    }
 }
 

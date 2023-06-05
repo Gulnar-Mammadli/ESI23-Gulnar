@@ -2,6 +2,7 @@ package com.esi.deliveryservice.controller;
 
 import java.util.List;
 
+import com.esi.deliveryservice.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +16,14 @@ import com.esi.deliveryservice.service.DeliveryService;
 @RequestMapping("/api")
 public class DeliveryController {
 
-@Autowired
-private DeliveryService deliveryService;
+    @Autowired
+    private DeliveryService deliveryService;
 
-/* 
-@GetMapping("/delivery")
-public List<OrderDto> getAllOrdersDeliveries(){
-return deliveryService.getAllOrdersDeliveries();
-} 
-*/
+
+    @GetMapping("/delivery")
+    public List<OrderDto> getAllOrdersDeliveries() {
+        return deliveryService.getAllOrdersDeliveries();
+    }
+
 
 }
