@@ -45,9 +45,9 @@ public class KitchenService {
             order.setPizzaCode(orderDto.getPizzaCode());
             order.setPizzaQuantity(orderDto.getPizzaQuantity());
             order.setOrderStatus(OrderStatus.Ready);
+            orderDto.setOrderStatus(OrderStatus.Ready);
 
             kitchenRepository.save(order);
-            orderDto.setOrderStatus(OrderStatus.Ready);
             kafkaDeliveryTemplate.send("orderReadyTopic",orderDto);
             log.info("A order request id: {} has been updated and sent to delivery service", orderDto.getId());
         }
